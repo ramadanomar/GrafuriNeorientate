@@ -51,6 +51,45 @@ struct graph *createGraph(int v,int e) {
     return G;
 }
   
+void addEdge(vector<int> adj[], int u, int v)
+{
+    adj[u].push_back(v);
+    adj[v].push_back(u);
+}
+
+void afisareGrafListeAdiacente(vector<int> adj[], int V)
+{
+    for (int v = 0; v < V; ++v) {
+        cout << "\n Lista de Adiacenta a nodului " << v
+             << "\n head ";
+        for (auto x : adj[v])
+            cout << "-> " << x;
+        printf("\n");
+    }
+}
+
+void afisareMatriceAdiacenta(int v) {
+   int i, j;
+   for(i = 0; i < v; i++) {
+      for(j = 0; j < v; j++) {
+         cout << vertArr[i][j] << " ";
+      }
+      cout << endl;
+   }
+}
+
+//VARAIBILE DEFINITE GLOBAL
+int V = 5; // NUMAR NODURI
+vector<int> adj[V]; // lista adiacenta
+int vertArr[20][20]; // matrice adiacenta
+int count = 0;
+int u, v;
+
+void nodAdaug(int u, int v) {       //Adaugare Nod in matrice pt adiacenta
+   vertArr[u][v] = 1;
+   vertArr[v][u] = 1;
+}
+
 int gradVarf(struct graph *G, int ver)
 {    
     int degree = 0;         
@@ -103,7 +142,7 @@ se numesc muchii.\n";
     revenire();
 }
 
-void metodeReprezentareMeniu() {
+void gradVarfMeniu() {
     system("CLS"); // Clear Screen
     cout << "Alege o optiune de mai jos:" << endl;
     cout << "1.Definitii:\n";
@@ -112,7 +151,7 @@ void metodeReprezentareMeniu() {
     cout << "4.Revenire\n";
 }
 
-void metodeReprezentareDefinitii() {
+void gradVarfDefinitii() {
     system("CLS");
     cout << "Varful izolat = un varf care are gradul 0.\n";
     cout << "Varful terminal = un varf care are gradul 1.\n";
@@ -137,8 +176,82 @@ void varfIzolat2(int varf) {
     int grad = INT_MIN;
     grad = gradVarf(G,varf);
     if (grad == 0)
-        cout <<"NODUL ESTE IZOLAT\n";
+        cout <<"VARFUL ESTE IZOLAT\n";
     else
-        cout <<"NODUL NU ESTE IZOLAT\n";
+        cout <<"VARFUL NU ESTE IZOLAT\n";
     revenire();
 }
+
+void VarfTerminalMeniu() {
+    system("CLS");
+    cout << "Alege o optiune de mai jos:" << endl;
+    cout << "1.Definitie:\n";
+    cout << "2.Aplicatie\n";
+    cout << "3.Revenire\n";
+}
+
+void varfTerminal1() {
+    cout << "Varful terminal = un varf care are gradul 1.\n";
+    revenire();
+}
+
+void varfTerminal2(int varf) {
+    int grad = INT_MIN;
+    grad = gradVarf(G,varf);
+    if (grad == 1)
+        cout <<"NODUL ESTE TERMINAL\n";
+    else
+        cout <<"NODUL NU ESTE TERMINAL\n";
+    revenire();
+}
+
+void parcurgereMeniu() {
+    system("CLS");
+    cout << "Alege o optiune de mai jos:" << endl;
+    cout << "1.Liste Adiacenta\n";
+    cout << "2.Vectorul Muchiilor\n";
+    cout << "3.Matricea de adiacenta\n";
+}
+
+void listeAdiacenta() {
+    system("CLS");
+    cout << "Alege o optiune de mai jos:" << endl;
+    cout << "1.Definitie\n";
+    cout << "2.Verificare\n";
+    cout << "3.Intoarcere\n";
+}
+
+void listeAdiacenta1() {
+    cout << "Reprezentarea grafului G prin liste de adiacență constă în:\n- precizarea numărului de vârfuri, n;\n- pentru fiecare vârf i, se precizează lista i a vecinilor săi, adică lista nodurilor adiacente cu nodul i.\n";
+    revenire();
+}
+
+void listeAdiacenta2() {
+    afisareGrafListeAdiacente(adj, V);
+    cout << endl;
+    revenire();
+}
+
+void matriceAdiacenta1() {
+    cout << "Daca exista o muchie determinata de varfurile x si y atunci, varfurile x si y se numesc adiacente. De asemenea, varfurile x si y sunt considerate incidente cu muchia pe care o formeaza. Fiecare extremitate a unei muchii este considerata incidenta cu muchia respectiva.\n";
+    revenire();
+}
+
+void matriceAdiacenta2() {
+    cout << "Adaugati noduri in graf: (numar)\n";
+    cin >> v;
+    int i = 0;
+    while (v>i) {
+        cin >> u >> v;
+        nodAdaug(u,v);
+        i++;
+        cout << endl;
+    }
+    
+    afisareMatriceAdiacenta(v);
+
+    cout << endl;
+
+    revenire();
+}
+
