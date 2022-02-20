@@ -1,7 +1,13 @@
 #include <iostream>
 #include <stdlib.h>
-
+#include <bits/stdc++.h>
 using namespace std;
+
+void addEdge(vector<int> adj[], int u, int v)
+{
+    adj[u].push_back(v);
+    adj[v].push_back(u);
+}
 
 void revenire{
     cout << "\nDoriti sa mai continuati?\n";
