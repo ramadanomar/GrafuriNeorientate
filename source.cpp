@@ -3,6 +3,17 @@
 
 using namespace std;
 
+void revenire{
+    cout << "\nDoriti sa mai continuati?\n";
+    int y=0;
+    cout <<"Introduceti 1 daca mai doriti sa efectuati operatie, altfel introduceti orice alt numar.\n";
+    cin >> y;
+    if (y==1)
+        afisareMeniuPrincipal();
+    else
+        return 0;
+}
+
 void afisareMeniuPrincipal {
     system("CLS"); // Clear Screen
     cout << "Alege o optiune de mai jos:" << endl;
@@ -28,5 +39,36 @@ se numesc muchii.\n";
     cout << "Un subgraf al lui G se obtine eliminand un varf si toate muchiile incidente cu acesta.\n";
     cout << "Un graf neorientat G = (V,E) se numeste bipartit daca multimea varfurilor sale poate fi partitionata in doua submultimi A si B nevid ( A ∪ B = V ; A ∩ B = Ø) astfel incat orice muchie sa aia o extremitate in A si una in B.\n";
     cout << "Un graf neorientat se numeste regulat daca toate varfurile sale au acelasi grad.\n";
+    revenire();
+}
+
+void metodeReprezentareMeniu {
+    system("CLS"); // Clear Screen
+    cout << "Alege o optiune de mai jos:" << endl;
+    cout << "1.Definitii:\n";
+    cout << "2.Varf Izolat\n";
+    cout << "3.Varf Terminal\n";
+    cout << "4.Revenire\n";
+}
+
+void metodeReprezentareDefinitii {
+    system("CLS");
+    cout << "Varful izolat = un varf care are gradul 0.\n";
+    cout << "Varful terminal = un varf care are gradul 1.\n";
+    revenire();
+
+}
+
+void varfIzolatMeniu {
+    system("CLS");
+    cout << "Alege o optiune de mai jos:" << endl;
+    cout << "1.Definitie:\n";
+    cout << "2.Aplicatie\n";
+    cout << "3.Revenire\n";
+}
+
+void varfIzolat1 {
+    cout << "Varful izolat = un varf care are gradul 0.\n";
+    revenire();
 }
 
