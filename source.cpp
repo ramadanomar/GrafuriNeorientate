@@ -3,13 +3,68 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void addEdge(vector<int> adj[], int u, int v)
-{
-    adj[u].push_back(v);
-    adj[v].push_back(u);
+struct graph {
+    // vertices
+    int v;         
+    // edges
+    int e;         
+    // directie src -> des
+    int **dir;     
+};
+
+struct graph *createGraph(int v,int e) {   
+    struct graph *G = new graph; 
+    G->v = v;
+    G->e = e;
+
+    //alocare memorie
+    G->dir = new int*[v];
+      
+    for (int i = 0;i < v;i++)
+        G->dir[i] = new int[v];
+      
+    /*  0-----1             GRAFIC DE TEST
+        | \   |
+        |  \  |
+        |   \ |
+        2-----3     */
+      
+      
+    //directie 0
+    G->dir[0][1]=1;
+    G->dir[0][2]=1;
+    G->dir[0][3]=1;
+      
+    //directie 1
+    G->dir[1][0]=1;
+    G->dir[1][3]=1;
+      
+    //directie 2
+    G->dir[2][0]=1;
+    G->dir[2][3]=1;
+      
+    //directie 3
+    G->dir[3][0]=1;
+    G->dir[3][1]=1;
+    G->dir[3][2]=1;
+
+    return G;
+}
+  
+int gradVarf(struct graph *G, int ver)
+{    
+    int degree = 0;         
+    for (int i=0; i<G->v; i++)     
+  
+        if (G-> dir[ver][i] == 1) 
+            degree++;             
+      
+    if(G-> dir[ver][ver] == 1)
+          degree++;
+    return degree;         
 }
 
-void revenire{
+void revenire() {
     cout << "\nDoriti sa mai continuati?\n";
     int y=0;
     cout <<"Introduceti 1 daca mai doriti sa efectuati operatie, altfel introduceti orice alt numar.\n";
@@ -20,7 +75,7 @@ void revenire{
         return 0;
 }
 
-void afisareMeniuPrincipal {
+void afisareMeniuPrincipal() {
     system("CLS"); // Clear Screen
     cout << "Alege o optiune de mai jos:" << endl;
     cout << "1.Definitii:\n";
@@ -35,7 +90,7 @@ void afisareMeniuPrincipal {
     cout << "10.Iesire:\n";
 }
 
-void definitii{
+void definitii() {
     system("CLS"); // Clear Screen
     cout << "Graf Neorientat: Se numeşte graf neorientat o pereche ordonată de multimi notată G=(V, M) unde V:este o multime finită şi nevidă, ale cărei elemente se numesc noduri sau vârfuri; si M: este o multime, de perechi neordonate de elemente distincte din V, ale cărei elemente
 se numesc muchii.\n";
@@ -48,7 +103,7 @@ se numesc muchii.\n";
     revenire();
 }
 
-void metodeReprezentareMeniu {
+void metodeReprezentareMeniu() {
     system("CLS"); // Clear Screen
     cout << "Alege o optiune de mai jos:" << endl;
     cout << "1.Definitii:\n";
@@ -57,7 +112,7 @@ void metodeReprezentareMeniu {
     cout << "4.Revenire\n";
 }
 
-void metodeReprezentareDefinitii {
+void metodeReprezentareDefinitii() {
     system("CLS");
     cout << "Varful izolat = un varf care are gradul 0.\n";
     cout << "Varful terminal = un varf care are gradul 1.\n";
@@ -65,7 +120,7 @@ void metodeReprezentareDefinitii {
 
 }
 
-void varfIzolatMeniu {
+void varfIzolatMeniu() {
     system("CLS");
     cout << "Alege o optiune de mai jos:" << endl;
     cout << "1.Definitie:\n";
@@ -73,8 +128,17 @@ void varfIzolatMeniu {
     cout << "3.Revenire\n";
 }
 
-void varfIzolat1 {
+void varfIzolat1() {
     cout << "Varful izolat = un varf care are gradul 0.\n";
     revenire();
 }
 
+void varfIzolat2(int varf) {
+    int grad = INT_MIN;
+    grad = gradVarf(G,varf);
+    if (grad == 0)
+        cout <<"NODUL ESTE IZOLAT\n";
+    else
+        cout <<"NODUL NU ESTE IZOLAT\n";
+    revenire();
+}
